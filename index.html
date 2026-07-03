@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Started | Roman Homes & Loans</title>
+<meta name="description" content="One expert, two licenses. Tell us a bit about your goals and Gretza Roman — Realtor & Loan Officer — will follow up personally.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN, no build step) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: '#F8F5EF',
+          navy: '#1B3A5C',
+          navy2: '#24476D',
+          gold: '#C8A44E',
+          goldLight: '#DCC07E',
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'serif'],
+          body: ['"Outfit"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  .field-input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    background: #FFFFFF;
+    border: 1.5px solid #E4DFD3;
+    border-radius: 0.6rem;
+    color: #061224;
+    font-size: 1rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .field-input:focus {
+    outline: none;
+    border-color: #C8A44E;
+    box-shadow: 0 0 0 3px rgba(200, 164, 78, 0.25);
+  }
+  .field-input[aria-invalid="true"] {
+    border-color: #B3413B;
+  }
+  .field-error {
+    color: #B3413B;
+    font-size: 0.8125rem;
+    margin-top: 0.35rem;
+    display: none;
+  }
+  .field-error.show { display: block; }
+
+  .radio-card {
+    cursor: pointer;
+    min-height: 48px;
+  }
+  .radio-card input:checked + span {
+    border-color: #C8A44E;
+    background: #FBF6EA;
+    box-shadow: 0 0 0 3px rgba(200, 164, 78, 0.18);
+  }
+  .radio-card input:focus-visible + span {
+    outline: 2px solid #C8A44E;
+    outline-offset: 2px;
+  }
+
+  #conditional-realtor {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 300ms ease, opacity 250ms ease, margin 300ms ease;
+  }
+  #conditional-realtor.open {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .btn-primary {
+    background: #C8A44E;
+    color: #061224;
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  }
+  .btn-primary:hover { background: #DCC07E; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .btn-primary:focus-visible { outline: 2px solid #061224; outline-offset: 2px; }
+
+  .success-check {
+    animation: pop 400ms ease;
+  }
+  @keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    70% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+</style>
+</head>
+<body class="bg-cream text-navy antialiased">
+
+<div class="min-h-dvh lg:grid lg:grid-cols-2">
+
+  <!-- Brand / story panel -->
+  <aside class="relative text-cream flex flex-col justify-between px-6 py-10 sm:px-12 sm:py-14 lg:min-h-dvh overflow-hidden"
+         style="background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 55%, #60A5FA 100%);">
+    <div class="absolute inset-0 pointer-events-none opacity-30"
+         style="background: radial-gradient(circle at 20% 15%, rgba(255,255,255,0.25), transparent 55%), radial-gradient(circle at 85% 85%, rgba(255,255,255,0.2), transparent 50%);"></div>
+
+    <div class="relative">
+      <div class="flex items-center gap-3">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <path d="M17 3 L31 14 V30 H21V20H13V30H3V14L17 3Z" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <span class="font-display text-xl sm:text-2xl tracking-wide">Roman Homes &amp; Loans</span>
+      </div>
+
+      <p class="mt-10 sm:mt-16 uppercase tracking-[0.2em] text-xs text-white/90 font-medium">One Expert. Two Licenses.</p>
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-[2.75rem] leading-tight mt-4 max-w-md">
+        Total peace of mind for your Space Coast home &amp; financing.
+      </h1>
+      <p class="mt-5 text-cream/70 max-w-sm leading-relaxed">
+        Gretza Roman is both a licensed Realtor and a licensed Loan Officer — so you get one trusted expert guiding you from search to closing, not two disconnected teams.
+      </p>
+
+    </div>
+
+    <div class="relative mt-12 lg:mt-0 pt-8 border-t border-white/10 text-sm text-cream/60">
+      <p>gretza@romanhomesandloans.com</p>
+      <p class="mt-1">Brevard County, FL &middot; The Space Coast</p>
+    </div>
+  </aside>
+
+  <!-- Form panel -->
+  <main class="flex items-center justify-center px-6 py-12 sm:px-10 lg:py-16">
+    <div class="w-full max-w-md">
+
+      <!-- Form state -->
+      <form id="signup-form" novalidate>
+        <h2 class="font-display text-2xl sm:text-3xl">Let's get started</h2>
+        <p class="mt-2 text-navy/60 text-sm leading-relaxed">
+          Share a few details and Gretza will reach out personally within one business day.
+        </p>
+
+        <div class="mt-8 space-y-5">
+
+          <!-- Name row -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="firstName" class="block text-sm font-medium mb-1.5">First name <span class="text-[#B3413B]">*</span></label>
+              <input id="firstName" name="firstName" type="text" autocomplete="given-name" required
+                     class="field-input" aria-describedby="firstName-error">
+              <p id="firstName-error" class="field-error" role="alert">Please enter your first name.</p>
+            </div>
+            <div>
+              <label for="lastName" class="block text-sm font-medium mb-1.5">Last name <span class="text-[#B3413B]">*</span></label>
+              <input id="lastName" name="lastName" type="text" autocomplete="family-name" required
+                     class="field-input" aria-describedby="lastName-error">
+              <p id="lastName-error" class="field-error" role="alert">Please enter your last name.</p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div>
+            <label for="phone" class="block text-sm font-medium mb-1.5">Phone number <span class="text-[#B3413B]">*</span></label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required
+                   placeholder="(321) 000-0000" class="field-input" aria-describedby="phone-error">
+            <p id="phone-error" class="field-error" role="alert">Please enter a valid phone number.</p>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium mb-1.5">Email address <span class="text-[#B3413B]">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required
+                   class="field-input" aria-describedby="email-error">
+            <p id="email-error" class="field-error" role="alert">Please enter a valid email address.</p>
+          </div>
+
+          <!-- Buyer or Realtor -->
+          <fieldset>
+            <legend class="block text-sm font-medium mb-1.5">Are you a Buyer or a Realtor? <span class="text-[#B3413B]">*</span></legend>
+            <div class="grid grid-cols-2 gap-3" id="role-group">
+              <label class="radio-card">
+                <input type="radio" name="role" value="Buyer" class="sr-only peer" required>
+                <span class="flex items-center justify-center h-12 rounded-lg border-1.5 border-[#E4DFD3] bg-white text-sm font-medium transition-colors" style="border-width:1.5px;">Buyer</span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="role" value="Realtor" class="sr-only peer" required>
+                <span class="flex items-center justify-center h-12 rounded-lg border-1.5 border-[#E4DFD3] bg-white text-sm font-medium transition-colors" style="border-width:1.5px;">Realtor</span>
+              </label>
+            </div>
+            <p id="role-error" class="field-error" role="alert">Please select one option.</p>
+          </fieldset>
+
+          <!-- Conditional: working with a realtor -->
+          <div id="conditional-realtor">
+            <fieldset class="pt-1">
+              <legend class="block text-sm font-medium mb-1.5">Are you already working with a realtor?</legend>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="radio-card">
+                  <input type="radio" name="workingWithRealtor" value="Yes" class="sr-only peer">
+                  <span class="flex items-center justify-center h-12 rounded-lg border-1.5 border-[#E4DFD3] bg-white text-sm font-medium transition-colors" style="border-width:1.5px;">Yes</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="workingWithRealtor" value="No" class="sr-only peer">
+                  <span class="flex items-center justify-center h-12 rounded-lg border-1.5 border-[#E4DFD3] bg-white text-sm font-medium transition-colors" style="border-width:1.5px;">No</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Timeline -->
+          <div>
+            <label for="timeline" class="block text-sm font-medium mb-1.5">What's your timeline? <span class="text-[#B3413B]">*</span></label>
+            <select id="timeline" name="timeline" required class="field-input" aria-describedby="timeline-error">
+              <option value="" disabled selected>Select an option</option>
+              <option value="0-3 months">0–3 months</option>
+              <option value="3-6 months">3–6 months</option>
+              <option value="6-12 months">6–12 months</option>
+              <option value="Just exploring">Just exploring</option>
+            </select>
+            <p id="timeline-error" class="field-error" role="alert">Please select your timeline.</p>
+          </div>
+
+          <!-- Referral -->
+          <div>
+            <label for="referral" class="block text-sm font-medium mb-1.5">Where did you hear about us? <span class="text-[#B3413B]">*</span></label>
+            <select id="referral" name="referral" required class="field-input" aria-describedby="referral-error">
+              <option value="" disabled selected>Select an option</option>
+              <option value="Referral / Word of mouth">Referral / Word of mouth</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Open House">Open House</option>
+              <option value="QR Code">QR Code</option>
+              <option value="Other">Other</option>
+            </select>
+            <p id="referral-error" class="field-error" role="alert">Please select an option.</p>
+          </div>
+
+        </div>
+
+        <p id="form-error-summary" class="mt-5 text-sm text-[#B3413B]" role="alert" style="display:none;"></p>
+
+        <button type="submit" id="submit-btn"
+                class="btn-primary w-full mt-7 h-12 rounded-lg font-semibold text-[15px] flex items-center justify-center gap-2 cursor-pointer">
+          <span id="submit-label">Get Started</span>
+          <svg id="submit-spinner" class="hidden animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="#061224" stroke-width="3" opacity="0.25"/>
+            <path d="M22 12a10 10 0 0 0-10-10" stroke="#061224" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <p class="mt-4 text-xs text-navy/45 text-center leading-relaxed">
+          By submitting, you agree to be contacted by Roman Homes &amp; Loans about your inquiry. We never share your information.
+        </p>
+      </form>
+
+      <!-- Success state -->
+      <div id="success-state" class="hidden text-center py-10">
+        <div class="success-check mx-auto w-16 h-16 rounded-full bg-[#FBF6EA] flex items-center justify-center">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 13l4 4L19 7" stroke="#C8A44E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="font-display text-2xl mt-6">You're all set!</h2>
+        <p class="mt-2 text-navy/60 text-sm max-w-sm mx-auto">
+          Thanks for reaching out. Redirecting you to Roman Homes &amp; Loans…
+        </p>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  // Replace with your deployed Google Apps Script Web App URL (see README.md)
+  var SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  var REDIRECT_URL = 'https://romanhomesandloans.com';
+
+  var form = document.getElementById('signup-form');
+  var roleInputs = form.querySelectorAll('input[name="role"]');
+  var conditionalBlock = document.getElementById('conditional-realtor');
+  var submitBtn = document.getElementById('submit-btn');
+  var submitLabel = document.getElementById('submit-label');
+  var submitSpinner = document.getElementById('submit-spinner');
+  var errorSummary = document.getElementById('form-error-summary');
+
+  roleInputs.forEach(function (input) {
+    input.addEventListener('change', function () {
+      if (input.value === 'Buyer' && input.checked) {
+        conditionalBlock.classList.add('open');
+      } else if (input.value === 'Realtor' && input.checked) {
+        conditionalBlock.classList.remove('open');
+        var wwr = form.querySelectorAll('input[name="workingWithRealtor"]');
+        wwr.forEach(function (r) { r.checked = false; });
+      }
+    });
+  });
+
+  function setFieldError(field, show) {
+    var errorEl = document.getElementById(field.id + '-error');
+    field.setAttribute('aria-invalid', show ? 'true' : 'false');
+    if (errorEl) errorEl.classList.toggle('show', show);
+  }
+
+  function validate() {
+    var valid = true;
+    var firstInvalid = null;
+
+    ['firstName', 'lastName', 'phone', 'email', 'timeline', 'referral'].forEach(function (id) {
+      var field = document.getElementById(id);
+      var ok = field.checkValidity() && field.value.trim() !== '';
+      setFieldError(field, !ok);
+      if (!ok) { valid = false; if (!firstInvalid) firstInvalid = field; }
+    });
+
+    var roleChecked = form.querySelector('input[name="role"]:checked');
+    var roleError = document.getElementById('role-error');
+    if (!roleChecked) {
+      valid = false;
+      roleError.classList.add('show');
+      if (!firstInvalid) firstInvalid = form.querySelector('input[name="role"]');
+    } else {
+      roleError.classList.remove('show');
+    }
+
+    if (!valid) {
+      errorSummary.style.display = 'block';
+      errorSummary.textContent = 'Please fix the highlighted fields before continuing.';
+      if (firstInvalid) firstInvalid.focus();
+    } else {
+      errorSummary.style.display = 'none';
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    var roleChecked = form.querySelector('input[name="role"]:checked');
+    var wwrChecked = form.querySelector('input[name="workingWithRealtor"]:checked');
+
+    var payload = {
+      firstName: document.getElementById('firstName').value.trim(),
+      lastName: document.getElementById('lastName').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      role: roleChecked.value,
+      workingWithRealtor: wwrChecked ? wwrChecked.value : '',
+      timeline: document.getElementById('timeline').value,
+      referral: document.getElementById('referral').value,
+      submittedAt: new Date().toISOString()
+    };
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Submitting…';
+    submitSpinner.classList.remove('hidden');
+
+    function finish() {
+      form.classList.add('hidden');
+      document.getElementById('success-state').classList.remove('hidden');
+      setTimeout(function () {
+        window.location.href = REDIRECT_URL;
+      }, 1800);
+    }
+
+    if (!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      // No backend configured yet — still redirect so the flow can be tested end-to-end.
+      console.warn('SCRIPT_URL is not configured. See README.md to connect Google Sheets.');
+      finish();
+      return;
+    }
+
+    // Apps Script web apps don't return CORS headers, so use no-cors and
+    // treat the request as fire-and-forget.
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    })
+      .then(finish)
+      .catch(function (err) {
+        console.error('Submission failed', err);
+        submitBtn.disabled = false;
+        submitLabel.textContent = 'Get Started';
+        submitSpinner.classList.add('hidden');
+        errorSummary.style.display = 'block';
+        errorSummary.textContent = 'Something went wrong sending your info. Please try again.';
+      });
+  });
+})();
+</script>
+</body>
+</html>

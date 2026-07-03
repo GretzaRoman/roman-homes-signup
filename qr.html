@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code | Roman Homes & Loans Sign-Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+  body { font-family: 'Outfit', sans-serif; }
+  .font-display { font-family: 'Playfair Display', serif; }
+</style>
+</head>
+<body class="min-h-dvh bg-[#F8F5EF] text-[#061224] flex items-center justify-center px-6 py-12">
+  <div class="w-full max-w-sm text-center">
+    <h1 class="font-display text-2xl">Sign-Up Page QR Code</h1>
+    <p class="mt-2 text-sm text-[#061224]/60">
+      Scan to open the Roman Homes &amp; Loans sign-up form. Print this for open houses, listings, or business cards.
+    </p>
+
+    <div class="mt-8 flex flex-col items-center gap-3">
+      <label for="target-url" class="text-xs font-medium text-left w-full">Sign-up page URL</label>
+      <input id="target-url" type="url" placeholder="https://yourusername.github.io/roman-homes-signup/"
+             class="w-full h-11 px-3 rounded-lg border border-[#E4DFD3] bg-white text-sm"
+             value="">
+    </div>
+
+    <div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-[#E4DFD3] inline-block">
+      <canvas id="qr-canvas"></canvas>
+    </div>
+
+    <button id="download-btn"
+            class="mt-6 w-full h-12 rounded-lg font-semibold text-[15px] cursor-pointer"
+            style="background:#C8A44E; color:#061224;">
+      Download QR Code (PNG)
+    </button>
+
+    <p class="mt-4 text-xs text-[#061224]/45">
+      Once your page is live on GitHub Pages, paste its URL above and the QR code updates automatically.
+    </p>
+  </div>
+
+  <script>
+    var input = document.getElementById('target-url');
+    var canvas = document.getElementById('qr-canvas');
+    var downloadBtn = document.getElementById('download-btn');
+
+    // Default: same folder as this file, e.g. https://user.github.io/repo/
+    var defaultUrl = window.location.href.replace(/qr\.html.*$/, '');
+    input.value = defaultUrl || 'https://yourusername.github.io/roman-homes-signup/';
+
+    function render() {
+      var url = input.value.trim() || 'https://romanhomesandloans.com';
+      QRCode.toCanvas(canvas, url, {
+        width: 260,
+        margin: 2,
+        color: { dark: '#061224', light: '#FFFFFF' }
+      });
+    }
+
+    input.addEventListener('input', render);
+    render();
+
+    downloadBtn.addEventListener('click', function () {
+      var link = document.createElement('a');
+      link.download = 'roman-homes-signup-qr.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>
