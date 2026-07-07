@@ -357,7 +357,6 @@
   }
 
   var hiddenIframe = document.getElementById('hidden_iframe');
-  var iframeLoadCount = 0; // first load event is the blank initial iframe, ignore it
   var awaitingSubmission = false;
 
   function finish() {
@@ -368,9 +367,11 @@
     }, 1800);
   }
 
+  // awaitingSubmission is only set to true right before we submit the form,
+  // so any 'load' event firing while it's true is the response to our own
+  // submission (not the iframe's initial blank load, which happens earlier).
   hiddenIframe.addEventListener('load', function () {
-    iframeLoadCount++;
-    if (awaitingSubmission && iframeLoadCount > 1) {
+    if (awaitingSubmission) {
       awaitingSubmission = false;
       finish();
     }
