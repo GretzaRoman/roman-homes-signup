@@ -290,6 +290,8 @@
   </main>
 </div>
 
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" title="form submission target"></iframe>
+
 <script>
 (function () {
   // Replace with your deployed Google Apps Script Web App URL (see README.md)
@@ -354,36 +356,33 @@
     return valid;
   }
 
+  var hiddenIframe = document.getElementById('hidden_iframe');
+  var iframeLoadCount = 0; // first load event is the blank initial iframe, ignore it
+  var awaitingSubmission = false;
+
+  function finish() {
+    form.classList.add('hidden');
+    document.getElementById('success-state').classList.remove('hidden');
+    setTimeout(function () {
+      window.location.href = REDIRECT_URL;
+    }, 1800);
+  }
+
+  hiddenIframe.addEventListener('load', function () {
+    iframeLoadCount++;
+    if (awaitingSubmission && iframeLoadCount > 1) {
+      awaitingSubmission = false;
+      finish();
+    }
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!validate()) return;
 
-    var roleChecked = form.querySelector('input[name="role"]:checked');
-    var wwrChecked = form.querySelector('input[name="workingWithRealtor"]:checked');
-
-    var payload = {
-      firstName: document.getElementById('firstName').value.trim(),
-      lastName: document.getElementById('lastName').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      role: roleChecked.value,
-      workingWithRealtor: wwrChecked ? wwrChecked.value : '',
-      timeline: document.getElementById('timeline').value,
-      referral: document.getElementById('referral').value,
-      submittedAt: new Date().toISOString()
-    };
-
     submitBtn.disabled = true;
     submitLabel.textContent = 'Submitting…';
     submitSpinner.classList.remove('hidden');
-
-    function finish() {
-      form.classList.add('hidden');
-      document.getElementById('success-state').classList.remove('hidden');
-      setTimeout(function () {
-        window.location.href = REDIRECT_URL;
-      }, 1800);
-    }
 
     if (!SCRIPT_URL || SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
       // No backend configured yet — still redirect so the flow can be tested end-to-end.
@@ -392,23 +391,24 @@
       return;
     }
 
-    // Apps Script web apps don't return CORS headers, so use no-cors and
-    // treat the request as fire-and-forget.
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    })
-      .then(finish)
-      .catch(function (err) {
-        console.error('Submission failed', err);
-        submitBtn.disabled = false;
-        submitLabel.textContent = 'Get Started';
-        submitSpinner.classList.add('hidden');
-        errorSummary.style.display = 'block';
-        errorSummary.textContent = 'Something went wrong sending your info. Please try again.';
-      });
+    // Submit as a real HTML form POST into a hidden iframe instead of fetch().
+    // This avoids CORS/no-cors quirks and browser extensions blocking cross-site
+    // fetch calls — it's the most reliable way to post from a static page into
+    // a Google Apps Script web app.
+    awaitingSubmission = true;
+    form.action = SCRIPT_URL;
+    form.method = 'POST';
+    form.target = 'hidden_iframe';
+    HTMLFormElement.prototype.submit.call(form);
+
+    // Safety net: if the iframe's load event doesn't fire for some reason,
+    // still move the visitor forward after a few seconds.
+    setTimeout(function () {
+      if (awaitingSubmission) {
+        awaitingSubmission = false;
+        finish();
+      }
+    }, 4000);
   });
 })();
 </script>

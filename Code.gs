@@ -35,7 +35,11 @@ function getSheet_() {
 
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents);
+    // Accepts either a real form POST (e.parameter, used by the hidden-iframe
+    // form submission) or a raw JSON body (used by fetch-based submissions).
+    var data = (e.parameter && e.parameter.firstName)
+      ? e.parameter
+      : JSON.parse(e.postData.contents);
     var sheet = getSheet_();
 
     if (sheet.getLastRow() === 0) {
