@@ -1,13 +1,17 @@
 /**
  * Roman Homes & Loans — sign-up form backend.
  *
+ * Writes every submission into this specific spreadsheet:
+ * https://docs.google.com/spreadsheets/d/1dKB-Eu9xi1Vo-0-Djo7csRJSZ4L4liCGn1YApyJSwe0/edit
+ *
  * Setup (see README.md for full step-by-step):
- * 1. Create a Google Sheet, open Extensions > Apps Script, paste this file in as Code.gs.
+ * 1. Open that Google Sheet, then Extensions > Apps Script, paste this file in as Code.gs.
  * 2. Run setupSheet() once from the Apps Script editor to add the header row.
  * 3. Deploy > New deployment > Web app. Execute as "Me", Access "Anyone".
  * 4. Copy the deployment URL into SCRIPT_URL in index.html.
  */
 
+var SPREADSHEET_ID = '1dKB-Eu9xi1Vo-0-Djo7csRJSZ4L4liCGn1YApyJSwe0';
 var SHEET_NAME = 'Signups';
 
 function setupSheet() {
@@ -21,7 +25,7 @@ function setupSheet() {
 }
 
 function getSheet_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);

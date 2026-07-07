@@ -11,10 +11,14 @@ A single-page lead capture form for Gretza Roman (Realtor + Loan Officer). Colle
 
 ## 1. Connect the Google Sheet backend
 
-1. Go to [sheets.google.com](https://sheets.google.com) and create a new blank spreadsheet. Name it something like "Roman Homes & Loans — Signups".
-2. In the sheet, go to **Extensions > Apps Script**.
-3. Delete the placeholder code and paste in the contents of `Code.gs` from this repo.
-4. In the Apps Script toolbar, select the function `setupSheet` from the dropdown next to "Run", then click **Run**. Approve the permissions Google asks for. This adds the header row to a `Signups` tab.
+Submissions are wired to write into this specific spreadsheet:
+[Roman Homes & Loans — Signups](https://docs.google.com/spreadsheets/d/1dKB-Eu9xi1Vo-0-Djo7csRJSZ4L4liCGn1YApyJSwe0/edit?gid=0#gid=0)
+(`Code.gs` already has its ID hardcoded as `SPREADSHEET_ID`.)
+
+1. Open that Google Sheet.
+2. Go to **Extensions > Apps Script**.
+3. Delete the placeholder code and paste in the full contents of `Code.gs` from this repo.
+4. In the Apps Script toolbar, select the function `setupSheet` from the dropdown next to "Run", then click **Run**. Approve the permissions Google asks for. This adds a `Signups` tab with a header row to the spreadsheet above.
 5. Click **Deploy > New deployment**.
    - Click the gear icon next to "Select type" and choose **Web app**.
    - Description: "Signup form handler" (or anything).
@@ -27,9 +31,7 @@ A single-page lead capture form for Gretza Roman (Realtor + Loan Officer). Colle
    ```
    Replace the placeholder with the URL you copied.
 
-Every submission now appears as a new row in the `Signups` tab of your Google Sheet, with the visitor's name, phone, email, buyer/realtor status, timeline, and referral source.
-
-> If you'd rather store this in a Google **Doc** instead of a Sheet, that's easy to swap — just ask and `Code.gs` can be changed to append a text block to a Doc instead of a spreadsheet row. A Sheet is recommended because it's much easier to sort/filter/export leads.
+Every submission now appears as a new row in the `Signups` tab of that Google Sheet, with the visitor's name, phone, email, buyer/realtor status, timeline, and referral source.
 
 ## 2. Host it on GitHub Pages
 
