@@ -13,25 +13,26 @@ A single-page lead capture form for Gretza Roman (Realtor + Loan Officer). Colle
 
 Submissions are wired to write into this specific spreadsheet:
 [Roman Homes & Loans — Signups](https://docs.google.com/spreadsheets/d/1dKB-Eu9xi1Vo-0-Djo7csRJSZ4L4liCGn1YApyJSwe0/edit?gid=0#gid=0)
-(`Code.gs` already has its ID hardcoded as `SPREADSHEET_ID`.)
 
 1. Open that Google Sheet.
 2. Go to **Extensions > Apps Script**.
 3. Delete the placeholder code and paste in the full contents of `Code.gs` from this repo.
-4. In the Apps Script toolbar, select the function `setupSheet` from the dropdown next to "Run", then click **Run**. Approve the permissions Google asks for. This adds a `Signups` tab with a header row to the spreadsheet above.
+4. Save (Ctrl+S).
 5. Click **Deploy > New deployment**.
    - Click the gear icon next to "Select type" and choose **Web app**.
    - Description: "Signup form handler" (or anything).
    - Execute as: **Me**
    - Who has access: **Anyone**
-6. Click **Deploy**, authorize again if prompted, and copy the **Web app URL** it gives you (ends in `/exec`).
+6. Click **Deploy**, authorize the permissions Google asks for, and copy the **Web app URL** it gives you (ends in `/exec`).
 7. Open `index.html` in this repo and find this line near the bottom:
    ```js
    var SCRIPT_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
    ```
    Replace the placeholder with the URL you copied.
 
-Every submission now appears as a new row in the `Signups` tab of that Google Sheet, with the visitor's name, phone, email, buyer/realtor status, timeline, and referral source.
+Every submission appends as a new row in whichever sheet tab is currently active in that spreadsheet, with the visitor's timestamp, name, phone, email, buyer/realtor status, timeline, and referral source.
+
+> **If you ever edit `Code.gs` again:** saving the file alone does **not** update the live endpoint. You must go to **Deploy > Manage deployments**, edit the existing Web app deployment, set the version to "New version," and deploy again — or create a fresh deployment and update `SCRIPT_URL` to match its new `/exec` link.
 
 ## 2. Host it on GitHub Pages
 
